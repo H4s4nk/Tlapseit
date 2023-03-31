@@ -1,7 +1,7 @@
 # Tlapseit
 ## V1.5.2
-### English
-### فارسی
+[English](#English)
+[فارسی](#فارسی)
 
 ### English
 **time lapse app for you and more**
@@ -22,10 +22,10 @@ It has 3 mode:
 
 
 ### to Do:
-- [] creat logo :sad:
-- [] change app theme 
-- [] save and load setting
-- [] creat time lapse frome captured images
-- [] add more video encoder
-- [] delet temp images after merge
-- [] calculate final video size
+- [ ] creat logo :sad:
+- [ ] change app theme 
+- [ ] save and load setting
+- [ ] creat time lapse frome captured images
+- [ ] add more video encoder
+- [ ] delet temp images after merge
+- [ ] calculate final video size
