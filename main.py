@@ -1,4 +1,4 @@
-# Time laps app
+# Time lapse app
 # by H.K
 # hope you enjoy it
 # toDo: add save setting and load from it
