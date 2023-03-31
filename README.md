@@ -1,13 +1,20 @@
 # Tlapseit
-## V1.5.2
-### English
-### فارسی
+## V1.5.4
+[English](#English)
+[فارسی](#فارسی)
 
 ### English
 **time lapse app for you and more**
+
+> When you can't find the program you want, create(code) it.
+
 this app helps you to creat timelapse of your pc screen when you are working or even playing video game.
+
+**Python 3.8** & [Requirements](/requirements.txt) 
+
 ***How to use***
-It has 3 mode:
+
+It has 3 modes:
 1. Infinit capture
     - In this mode app will capture infinit number of images until you press end capture
 2. Clip limit
@@ -20,12 +27,13 @@ It has 3 mode:
     number of screenshots = clip lentgh(second) * fps
     work time(second) = clip lentgh(second) * fps * interval
 
+Feel free to share bugs-ask for features and more...
 
 ### to Do:
-- [] creat logo :sad:
-- [] change app theme 
-- [] save and load setting
-- [] creat time lapse frome captured images
-- [] add more video encoder
-- [] delet temp images after merge
-- [] calculate final video size
+- [ ] creat logo :sad:
+- [ ] change app theme 
+- [ ] save and load setting
+- [ ] creat time lapse frome captured images
+- [ ] add more video encoder
+- [ ] delet temp images after merge
+- [ ] calculate final video size
