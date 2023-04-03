@@ -1,5 +1,5 @@
-# Tlapseit
-## V1.5.4
+# T-lapse it
+## V1.6.0 - [Change log](/log)
 [English](#English)
 [فارسی](#فارسی)
 
@@ -8,8 +8,10 @@
 
 > When you can't find the program you want, create(code) it.
 
-this app helps you to creat timelapse of your pc screen when you are working or even playing video game.
+Hey, This app helps you to creat timelapse of your PC screen when you are working or even playing video game.
 
+GUI based for easy and simple usage. by [PysimpleGUI](https://www.pysimplegui.org/en/latest/) [GitHub](https://github.com/PySimpleGUI)
+Find screenshots [here](/assets/src).
 **Python 3.8** & [Requirements](/requirements.txt) 
 
 ***How to use***
@@ -30,7 +32,7 @@ It has 3 modes:
 Feel free to share bugs-ask for features and more...
 
 ### to Do:
-- [ ] creat logo :sad:
+
 - [ ] change app theme 
 - [ ] save and load setting
 - [ ] creat time lapse frome captured images

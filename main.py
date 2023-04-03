@@ -1,8 +1,14 @@
-# Time lapse app
+# Time lapse app AKA T-lapse it
 # by H.K
+# under MIT License
+# Copyright (c) 2023 Hasan K.
 # hope you enjoy it
-# toDo: add save setting and load from it
-# toDo: add  tab to change app theme 
+# check github page for update/change and more: 
+# https://github.com/H4s4nk/Tlapseit
+#
+#
+#
+
 import PySimpleGUI as sg # GUI
 import pyautogui as sc  # screen shot
 import threading    # multi threading
@@ -57,7 +63,7 @@ def Make_Window1():
                     [sg.Radio("Infinit capture", "CaptureMode", default=True, size=(10,1), k='-R1-',enable_events=True),
                     sg.Radio('Clip limit', "CaptureMode", size=(10,1), k='-R2-',enable_events=True), 
                     sg.Radio('Work limit', "CaptureMode", size=(10,1), k='-R3-',enable_events=True)],
-                    [sg.Col([
+                    [sg.Col([   # Infinit capture
                         [sg.Text("Interval(second):"), sg.InputText("10",k="-interval-",s=10,change_submits=True), sg.Text("*",text_color="Red",visible=False,k="-et1-")],
                         [sg.Col([
                             [sg.Text("Save images in:"),sg.Button("Browse",k="-BrowseImg1-"),sg.Text("Format:"),
@@ -65,7 +71,7 @@ def Make_Window1():
                             ],k="-colu5-", visible = False), sg.Canvas(size=(0,0), pad=(0,0))],
                         ],k="-colu1-",visible=True), sg.Canvas(size=(0,0), pad=(0,0))],
 
-                    [sg.Col([
+                    [sg.Col([   # Clip limit
                         [sg.Text("Clip lentgh(h/m/s):"),sg.InputText(hour,k="-hour-",s=5, change_submits=True),
                         sg.InputText(min,k="-min-",s=5, change_submits=True),sg.InputText(sec,k="-sec-",s=5, change_submits=True),
                         sg.Text("*",text_color="Red",visible=False,k="-et2-")],
@@ -78,7 +84,7 @@ def Make_Window1():
                         ],k="-colu6-", visible = False), sg.Canvas(size=(0,0), pad=(0,0))],
                     ],k="-colu2-",visible=False), sg.Canvas(size=(0,0), pad=(0,0))],
 
-                    [sg.Col([
+                    [sg.Col([   # Work limit
                         [sg.Text("Work lentgh(h/m/s):"),sg.InputText("1",k="-wlhour-",s=5, change_submits=True),
                         sg.InputText("0",k="-wlmin-",s=5, change_submits=True),sg.InputText("0",k="-wlsec-",s=5, change_submits=True),
                         sg.Text("*",text_color="Red",visible=False,k="-et3-")],
@@ -95,7 +101,7 @@ def Make_Window1():
                     [sg.Col([
                         [sg.Text("Video format:"),sg.Combo(values=("mp4","avi"),default_value="mp4",k="-clipformat-",size=10,enable_events=True,readonly=True)],
                         [sg.Col([[sg.Text("Video FPS:"),sg.Combo(values=("5","10","12","15","20","24","25","30","60"),default_value="12",size=15,k="-fpsCombo1-",enable_events=True,readonly=True), ]], k="-colu8-",visible=True ),sg.Canvas(size=(0,0), pad=(0,0))],
-                        [sg.Text("Enter name:"),sg.InputText(default_text=name,k="-clipname-",size=30),sg.Text("*",text_color="Red",visible=False,k="-et4-")],
+                        [sg.Text("Enter name:"),sg.InputText(default_text=name,k="-clipname-",size=30, change_submits=True),sg.Text("*",text_color="Red",visible=False,k="-et4-")],
                         [sg.Text("Save file in:"),sg.Button("Browse",k="-BrowseVideo-")],
                         [sg.Checkbox("Delete images after clip creation",default=False,k="-videocheck-",disabled=True)]
                         ],k="-colu4-",visible=True), sg.Canvas(size=(0,0), pad=(0,0))],
@@ -208,7 +214,7 @@ def Make_Window4():
                        ], k = "4colu24", visible=Swstat["videocheck"]), sg.Canvas(size=(0,0), pad=(0,0))],
               [sg.Col([
                 [sg.Text("Finished :)")],
-                [sg.Multiline("Clip save location: "+ vidloc + "/" + name + "." + vidfrmt, s=(25,5))],
+                [sg.Multiline("Clip save location: "+ vidloc + name + "." + vidfrmt, s=(25,5))],
                 [sg.Button("Finish", k = "4Exit24")]
                        ], k = "4colu34", visible= False), sg.Canvas(size=(0,0), pad=(0,0))]
               ]
@@ -314,20 +320,22 @@ def w3update(): #threading for timers
     while True:
         if up == True:
             window3["3uTimer3"].update(value = Count_Up()+ "/" + str(scnumber))
-            window3["3dTimer3"].update(value = Count_Down() + "/" + str(totalsc - scnumber))
+            if Swstat["-R1-"] == False:
+                window3["3dTimer3"].update(value = Count_Down() + "/" + str(totalsc - scnumber))
             if i == interval:
                 captureSCs()
                 i=0
             i += 1
-        if(scnumber >= totalsc):
-            #window3.close()
-            #window4 = Make_Window4()
-            #if Swstat["videocheck"]:
-            #    videomaker()
-            window3["3eCapture3"].update(text = "Next")
-            window3["3pa-co3"].update(disabled = True)
-            window3["3dTimer3"].update(visible = False)
-            break
+        if Swstat["-R1-"] == False:
+            if(scnumber >= totalsc):
+                #window3.close()
+                #window4 = Make_Window4()
+                #if Swstat["videocheck"]:
+                #    videomaker()
+                window3["3eCapture3"].update(text = "Next")
+                window3["3pa-co3"].update(disabled = True)
+                window3["3dTimer3"].update(visible = False)
+                break
         time.sleep(1) # 1 second
 
 tr_A = threading.Thread(target=w3update, daemon=True) # target tread a to func.
@@ -339,7 +347,7 @@ window1, window2, window3, window4 = Make_Window1(), None, None, None
 
 while True:                             # The Event Loop
     window, event, values = sg.read_all_windows()
-    #print(event)
+    #print(event) 
     
     #if window == window1 and event in (sg.WIN_CLOSED, 'Exit'):
     #    break
@@ -377,6 +385,7 @@ while True:                             # The Event Loop
                     imgfrmt = values["-imgformatcombo2-"]
                 elif values["-R3-"]:
                     interval = int(values["-interval3-"])
+                    s,m,h = cpmaker(((hour * 60 * 60) + (min * 60) + (sec)))
                     clength = str(h) + ":" + str(m) + ":" + str(s)
                     wlength = str(hour) + ":" + str(min) + ":" + str(sec)
                     fps = values["-fpsCombo3-"]
@@ -582,7 +591,10 @@ while True:                             # The Event Loop
                     window1["-chour-"].update(value = h)
                     window1["-cmin-"].update(value = m)
                     window1["-csec-"].update(value = s)
-                        
+        elif event == "-clipname-":
+            name = values["-clipname-"]
+        
+        
     elif window == window2:
         if event == "2Back2":
             window2.close()
