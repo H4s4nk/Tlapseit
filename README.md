@@ -12,6 +12,7 @@ Hey, This app helps you to creat timelapse of your PC screen when you are workin
 
 GUI based for easy and simple usage. by [PysimpleGUI](https://www.pysimplegui.org/en/latest/) [GitHub](https://github.com/PySimpleGUI)
 Find screenshots [here](/assets/src).
+
 **Python 3.8** & [Requirements](/requirements.txt) 
 
 ***How to use***
